@@ -1,0 +1,34 @@
+server:
+  port: 10086
+spring:
+  application:
+    name: mars-registry
+
+eureka:
+  instance:
+    #设置该服务注册中心的 hostname
+    hostname: eureka-server
+    #server收到下次心跳的超时时间，如果30秒还收不到，这个instance就拜拜
+    leaseExpirationDurationInSeconds: 30
+    #client发送给server心跳的时间间隔
+    leaseRenewalIntervalInSeconds: 10
+    preferIpAddress: true
+    ipAddress: ${spring.cloud.client.ip-address}
+    instanceId: ${spring.cloud.client.ip-address}:${server.port}
+  server:
+    # 自我保护模式关闭
+    enableSelfPreservation: false
+    # 扫描失效服务的间隔时间
+    eviction-interval-timer-in-ms: 30000
+  client:
+    service-url:
+      #指定服务注册中心的位置
+      defaultZone: http://127.0.0.1:10086/eureka
+    #目前创建的应用是一个服务注册中心，而不是一个普通的应用，默认情况下，这个应用会向注册中心（也是它自己）注册它自己，设置false表示禁止
+    registerWithEureka: false
+    #表示不去检索其他的服务，因为服务注册中心本身的职责就是维护服务的实例，它不需要去检索其他服务
+    fetchRegistry: false
+ribbon:
+  eureka:
+    enabled: true
+#  listOfServers: localhost:8080

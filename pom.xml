@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.mars</groupId>
+  <artifactId>marsland</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+
+  <parent>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-parent</artifactId>
+<!--    <version>2.4.8</version>-->
+    <version>2.2.5.RELEASE</version>
+  </parent>
+
+  <modules>
+    <module>mars-registry</module>
+    <module>mars-commons</module>
+    <module>mars-users</module>
+    <module>mars-website-info</module>
+    <module>mars-gateway</module>
+  </modules>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- springCloud -->
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+<!--        <version>2020.0.4</version>-->
+        <version>Hoxton.SR3</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      <!-- pageHelper -->
+      <dependency>
+        <groupId>com.github.pagehelper</groupId>
+        <artifactId>pagehelper-spring-boot-starter</artifactId>
+        <version>1.2.13</version>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.8</version>
+    </dependency>
+
+<!--    <dependency>-->
+<!--      <groupId>org.apache.commons</groupId>-->
+<!--      <artifactId>commons-lang3</artifactId>-->
+<!--      <version>3.10</version>-->
+<!--    </dependency>-->
+
+<!--    <dependency>-->
+<!--      <groupId>mysql</groupId>-->
+<!--      <artifactId>mysql-connector-java</artifactId>-->
+<!--      <version>8.0.26</version>-->
+<!--    </dependency>-->
+
+    <!-- https://mvnrepository.com/artifact/javax.persistence/persistence-api -->
+    <dependency>
+      <groupId>javax.persistence</groupId>
+      <artifactId>persistence-api</artifactId>
+      <version>1.0</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>1.8</source>
+          <target>1.8</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-surefire-plugin</artifactId>
+        <version>2.22.2</version>
+        <configuration>
+          <skipTests>true</skipTests>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
