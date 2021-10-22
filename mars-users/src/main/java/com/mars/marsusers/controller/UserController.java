@@ -2,9 +2,13 @@ package com.mars.marsusers.controller;
 
 import com.mars.marscommons.utils.CommonsTestClass;
 import com.mars.marscommons.utils.CommonsTestInterface;
+import com.mars.marsusers.bean.Users;
+import com.mars.marsusers.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 public class UserController {
@@ -14,6 +18,9 @@ public class UserController {
 
     @Autowired
     private CommonsTestInterface commonsTestInterface;
+
+    @Autowired
+    private UserService userService;
 
     /*测速静态方法*/
     @GetMapping("/helloWorldStatic")
@@ -32,5 +39,11 @@ public class UserController {
     public void helloWorldInterface(){
         commonsTestInterface.helloInterface();
     }
+
+    /**
+     * 获取用户列表
+     * */
+    @GetMapping("/getUsers")
+    public List<Users> getUsers(){return userService.getUsers();}
 
 }

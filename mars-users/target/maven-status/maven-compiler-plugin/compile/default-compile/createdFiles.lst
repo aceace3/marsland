@@ -1,0 +1,7 @@
+com\mars\marsusers\bean\Users.class
+com\mars\marsusers\controller\UserController.class
+com\mars\marsusers\mapper\UserMapper.class
+com\mars\marsusers\bean\Roles.class
+com\mars\MarsUsersApplication.class
+com\mars\marsusers\service\UserService.class
+com\mars\marsusers\bean\Permissions.class
