@@ -11,6 +11,7 @@
         <module name="mars-gateway" />
         <module name="mars-website-info" />
         <module name="mars-users" />
+        <module name="mars-system" />
         <module name="mars-registry" />
       </profile>
     </annotationProcessing>
@@ -23,6 +24,7 @@
       <module name="mars-commons" options="-parameters" />
       <module name="mars-gateway" options="-parameters" />
       <module name="mars-registry" options="-parameters" />
+      <module name="mars-system" options="-parameters" />
       <module name="mars-users" options="-parameters" />
       <module name="mars-website-info" options="-parameters" />
       <module name="users" options="-parameters" />

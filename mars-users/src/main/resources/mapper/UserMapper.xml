@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.marsusers.mapper.UserMapper">
+
+    <select id="getUsers" resultType="Users">
+        SELECT * FROM users
+    </select>
+
+    <insert id="registerUser" useGeneratedKeys="true" keyProperty="id" parameterType="Users">
+        INSERT INTO users(username, password, alias, gender, motto, reg_time, email, is_del)
+        VALUES(#{username}, #{password}, #{alias}, #{gender}, #{motto}, #{regTime}, #{email}, #{isDel})
+    </insert>
+
+    <select id="getUserByUsername" resultType="Users">
+        SELECT * FROM users
+        WHERE username = #{username}
+    </select>
+
+    <select id="getUserByUsernameAndPassword" resultType="Users">
+        SELECT * FROM users
+        WHERE username = #{username} AND password = #{password}
+    </select>
+</mapper>

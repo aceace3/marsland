@@ -26,6 +26,7 @@
     <module>mars-users</module>
     <module>mars-website-info</module>
     <module>mars-gateway</module>
+    <module>mars-system</module>
   </modules>
 
   <dependencyManagement>
