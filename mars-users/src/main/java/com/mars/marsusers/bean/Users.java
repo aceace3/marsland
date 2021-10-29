@@ -5,6 +5,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -51,7 +52,7 @@ public class Users {
     /**
      * 注册时间
      */
-    private Date regTime;
+    private Timestamp regTime;
 
     /**
      * 邮箱

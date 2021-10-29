@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.xml.crypto.Data;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -47,6 +50,10 @@ public class UserService {
         }
 
         try {
+            //注册时间
+            Date date = new Date();
+            Timestamp registerTime = new Timestamp(date.getTime());
+            user.setRegTime(registerTime);
             //向users表插入数据
             userMapper.registerUser(user);
             //获取当前注册用户id
