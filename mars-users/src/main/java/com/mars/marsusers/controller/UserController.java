@@ -81,4 +81,12 @@ public class UserController {
         return ResultUtil.fail(res);
     }
 
+    /**
+     * 通过id查询user
+     * */
+    @GetMapping("/getUserById")
+    public Result getUserById(@RequestParam("userId")Integer userId){
+        return ResultUtil.success(userService.getUserById(userId));
+    }
+
 }

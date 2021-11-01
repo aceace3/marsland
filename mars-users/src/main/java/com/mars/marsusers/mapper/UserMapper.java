@@ -20,4 +20,5 @@ public interface UserMapper {
 
     Users getUserByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
+    Users getUserById(@Param("userId")Integer userId);
 }

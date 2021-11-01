@@ -20,4 +20,10 @@
         SELECT * FROM users
         WHERE username = #{username} AND password = #{password}
     </select>
+
+    <select id="getUserById" resultType="Users" parameterType="java.lang.Integer">
+        SELECT * FROM users
+        WHERE id = #{userId}
+    </select>
+
 </mapper>

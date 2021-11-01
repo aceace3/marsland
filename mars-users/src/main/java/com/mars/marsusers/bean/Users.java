@@ -1,5 +1,6 @@
 package com.mars.marsusers.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -27,6 +28,7 @@ public class Users {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**

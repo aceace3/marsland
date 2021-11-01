@@ -77,4 +77,11 @@ public class UserService {
         String token = JWTUtil.genJWT(user.getId().toString());
         return token;
     }
+
+    /**
+     * 通过id查询user
+     * */
+    public Users getUserById(Integer userId){
+        return userMapper.getUserById(userId);
+    }
 }
