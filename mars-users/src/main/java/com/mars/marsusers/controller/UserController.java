@@ -8,6 +8,7 @@ import com.mars.marsusers.bean.Users;
 import com.mars.marsusers.service.UserRoleService;
 import com.mars.marsusers.service.UserService;
 import com.mars.marsusers.utils.JWTUtil;
+import com.mars.marsusers.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -87,6 +88,14 @@ public class UserController {
     @GetMapping("/getUserById")
     public Result getUserById(@RequestParam("userId")Integer userId){
         return ResultUtil.success(userService.getUserById(userId));
+    }
+
+    /**
+     * 退出登录
+     * */
+    @GetMapping("/logoutUser")
+    public Result logoutUser(@RequestParam("userId")Integer userId){
+        return ResultUtil.success(userService.logoutUser(userId));
     }
 
 }

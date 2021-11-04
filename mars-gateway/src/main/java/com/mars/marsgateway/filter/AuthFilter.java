@@ -1,6 +1,7 @@
 package com.mars.marsgateway.filter;
 
 import com.mars.marsgateway.utils.JWTUtil;
+import com.mars.marsgateway.utils.RedisUtil;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.netflix.zuul.exception.ZuulException;
@@ -20,6 +21,12 @@ import java.util.List;
 
 @Component
 public class AuthFilter extends ZuulFilter {
+
+    //jwt token 保存redis的前缀
+    private static final String JWT_TOKEN_HEADER = "JWT_TOKEN_USED_BY_USERID_";
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     /**
      * 过滤器类型 pre前置(表示在路由之前执行过滤器 ), post后置
@@ -60,7 +67,7 @@ public class AuthFilter extends ZuulFilter {
         String requestURI = request.getRequestURI();
         //判断当前请求是否在白名单内
         List<String> whiteList = new ArrayList<>();
-            whiteList.add("/mars/users/register");
+//            whiteList.add("/mars/users/register");
             whiteList.add("/mars/users/login");
 
         for (String whiteUrl: whiteList){
@@ -94,6 +101,14 @@ public class AuthFilter extends ZuulFilter {
                 ctx.setSendZuulResponse(false);
                 ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
                 ctx.setResponseBody("token expired");
+                return null;
+            }
+            //判断redis中存在token
+            String key = JWT_TOKEN_HEADER + userId;
+            if (!redisUtil.hasKey(key) || !redisUtil.get(key).equals(loginToken)){
+                ctx.setSendZuulResponse(false);
+                ctx.setResponseStatusCode(HttpStatus.UNAUTHORIZED.value());
+                ctx.setResponseBody("token auth fail");
                 return null;
             }
         }

@@ -1,4 +1,4 @@
-package com.mars.marsusers.config;
+package com.mars.marsgateway.config;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

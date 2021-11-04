@@ -6,6 +6,7 @@ import com.mars.marsusers.mapper.UserMapper;
 import com.mars.marsusers.mapper.UserRoleMapper;
 
 import com.mars.marsusers.utils.JWTUtil;
+import com.mars.marsusers.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,11 +20,17 @@ import java.util.List;
 @Transactional
 public class UserService {
 
+    //jwt token 保存redis的前缀
+    private static final String JWT_TOKEN_HEADER = "JWT_TOKEN_USED_BY_USERID_";
+
     @Autowired
     private UserMapper userMapper;
 
     @Autowired
     private UserRoleMapper userRoleMapper;
+
+    @Autowired
+    private RedisUtil redisUtil;
 
     public List<Users> getUsers(){
         return userMapper.getUsers();
@@ -74,7 +81,11 @@ public class UserService {
         if (user == null){
             return "登陆失败";
         }
+
         String token = JWTUtil.genJWT(user.getId().toString());
+        String key = JWT_TOKEN_HEADER + user.getId();
+        redisUtil.set(key, token, JWTUtil.TIMEOUT);
+
         return token;
     }
 
@@ -83,5 +94,19 @@ public class UserService {
      * */
     public Users getUserById(Integer userId){
         return userMapper.getUserById(userId);
+    }
+
+    /**
+     * 退出登录
+     * */
+    public String logoutUser(Integer userId){
+        try {
+            String key = JWT_TOKEN_HEADER + userId;
+            redisUtil.del(key);
+            return "退出成功";
+        }catch (Exception e){
+            System.err.println("退出登录失败："+e);
+            return "退出失败";
+        }
     }
 }

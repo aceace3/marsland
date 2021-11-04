@@ -57,7 +57,7 @@ public class JWTUtil {
     /**
      * JWT 添加至PAYLOAD的有效期(秒)
      */
-    private static final int TIMEOUT = 60 * 60 * 24;
+    public static final int TIMEOUT = 60 * 60 * 24;
 
     /**
      * 生成JWT
