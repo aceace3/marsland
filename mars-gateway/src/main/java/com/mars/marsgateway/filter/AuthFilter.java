@@ -67,7 +67,7 @@ public class AuthFilter extends ZuulFilter {
         String requestURI = request.getRequestURI();
         //判断当前请求是否在白名单内
         List<String> whiteList = new ArrayList<>();
-//            whiteList.add("/mars/users/register");
+            whiteList.add("/mars/users/register");
             whiteList.add("/mars/users/login");
 
         for (String whiteUrl: whiteList){

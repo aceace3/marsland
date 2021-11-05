@@ -1,6 +1,7 @@
 package com.mars.marsusers.bean;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import tk.mybatis.mapper.annotation.KeySql;
 
@@ -65,4 +66,10 @@ public class Users {
      * 是否注销
      */
     private Integer isDel;
+
+    //该注解保证 controller 中接收 json 数据的  password 字段不为 null
+    @JsonProperty
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

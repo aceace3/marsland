@@ -6,6 +6,7 @@ import com.mars.marsusers.mapper.UserMapper;
 import com.mars.marsusers.mapper.UserRoleMapper;
 
 import com.mars.marsusers.utils.JWTUtil;
+import com.mars.marsusers.utils.MD5Util;
 import com.mars.marsusers.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,6 +58,9 @@ public class UserService {
         }
 
         try {
+            //密码加密
+            String pwdMD5 = MD5Util.getSaltMD5(user.getPassword());
+            user.setPassword(pwdMD5);
             //注册时间
             Date date = new Date();
             Timestamp registerTime = new Timestamp(date.getTime());
@@ -77,7 +81,8 @@ public class UserService {
      * 登录
      * */
     public String login(String username, String password){
-        Users user = userMapper.getUserByUsernameAndPassword(username, password);
+        String pwsMD5 = MD5Util.getSaltMD5(password);
+        Users user = userMapper.getUserByUsernameAndPassword(username, pwsMD5);
         if (user == null){
             return "登陆失败";
         }
