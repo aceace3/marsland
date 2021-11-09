@@ -7,12 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="mars-commons" />
         <module name="mars-gateway" />
-        <module name="mars-website-info" />
         <module name="mars-users" />
-        <module name="mars-system" />
         <module name="mars-registry" />
+        <module name="mars-commons" />
+        <module name="mars-blog" />
+        <module name="mars-website-info" />
+        <module name="mars-system" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -21,6 +22,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mars-blog" options="-parameters" />
       <module name="mars-commons" options="-parameters" />
       <module name="mars-gateway" options="-parameters" />
       <module name="mars-registry" options="-parameters" />

@@ -27,6 +27,7 @@
     <module>mars-website-info</module>
     <module>mars-gateway</module>
     <module>mars-system</module>
+    <module>mars-blog</module>
   </modules>
 
   <dependencyManagement>

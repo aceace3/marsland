@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mars.marsblog.mapper.ArticleMapper">
+
+    <sql id="article_param">
+        t1.id,
+        t1.title,
+        t1.user_id AS userId,
+        t1.user_name AS userName,
+        t1.create_time AS createTime,
+        t1.update_time AS updateTime,
+        t1.summary,
+        t1.star_count AS starCount,
+        t1.comment_count AS commentCount,
+        t1.read_count AS readCount,
+        t1.classify_id AS classifyId,
+        t1.is_essence AS isEssence,
+        t1.is_top AS isTop,
+        t1.is_del AS isDel
+    </sql>
+
+    <select id="findAllArticle" resultType="com.mars.marsblog.bean.vo.ArticleVO">
+        SELECT <include refid="article_param" />, t2.classify_name AS classification, t3.tag_name AS tag
+        FROM article t1
+        LEFT JOIN classification t2 ON t1.classify_id = t2.id
+        LEFT JOIN tag t3 ON t3.article_id = t1.id
+    </select>
+
+</mapper>
